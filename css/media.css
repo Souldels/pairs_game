@@ -1,0 +1,33 @@
+@media (max-width: 540px) {
+
+	body {
+		background: linear-gradient(to right, rgb(156, 163, 175), rgb(75, 85, 99));
+	}
+
+	.title {
+		margin-bottom: 40px;
+		font-size: 36px;
+	}
+
+	.wrapper {
+		padding: 10px;
+		border-radius: 20px;
+	}
+
+	.cards {
+		gap: 8px;
+	}
+
+	.card {
+		width: 65px;
+		height: 65px;
+	}
+
+	.card__front, .card__back {
+		border-radius: 10px;
+	}
+
+	.btn {
+		width: 100px;
+	}
+}
