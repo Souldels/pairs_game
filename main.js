@@ -121,7 +121,7 @@ game();
 // Если пользователь победил
 function checkWin() {
 	if (matchedCards.length === cardsArr.length) {
-		showModal("Вы выйграли!");
+		showModal("Вы выиграли!");
 		resetGame();
 	}
 }
