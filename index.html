@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <h1 class="title">Игра в пары</h1>
+    <h1 class="title">"Train Your Brain"</h1>
     <div class="wrapper">
         <ul class="cards">
         </ul>
@@ -34,6 +34,10 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+    <script>
+        vkBridge.send("VKWebAppInit", {});
+    </script>
 </body>
 
 </html>
