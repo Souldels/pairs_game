@@ -7,6 +7,8 @@ const timerBox = document.querySelector('.elapsed-time');
 const modal = document.querySelector('.modal');
 const modalMessage = document.querySelector('.modal-message');
 const closeBtn = document.querySelector('.modal-close');
+const startBtn = document.querySelector('.modal-btn');
+const instructionsModal = document.querySelector('.modal-instructions');
 
 let cardsArr = [];
 let flippedCards = [];
@@ -18,6 +20,12 @@ let timer;
 let defaultColor = '#c5c2c2';
 
 refreshBtn.addEventListener('click', resetGame);
+
+startBtn.addEventListener('click', startGame);
+
+function startGame() {
+	instructionsModal.style.display = 'none';
+}
 
 // функция таймера
 function countdown() {
