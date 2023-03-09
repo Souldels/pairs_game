@@ -24,8 +24,12 @@ ul {
 	list-style: none;
 }
 
-.title {
+h1,
+h2 {
 	margin: 0;
+}
+
+.title {
 	margin-bottom: 60px;
 	font-size: 48px;
 }
@@ -183,4 +187,25 @@ ul {
 .modal-message {
 	font-size: 1.8rem;
 	margin: 0;
+}
+
+.modal-instructions {
+	display: flex;
+}
+
+.modal-instructions__content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 300px;
+	background-color: white;
+	padding: 20px;
+	width: 80%;
+	max-width: 500px;
+	border-radius: 10px;
+}
+
+.modal-btn {
+	padding: 10px;
 }
