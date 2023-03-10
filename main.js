@@ -26,7 +26,7 @@ startBtn.addEventListener('click', startGame);
 vkBridge.send("VKWebAppCheckNativeAds", { "ad_format": "interstitial" });
 
 if (window.innerWidth < 576) {
-	bridge.send('VKWebAppShowBannerAd', {
+	vkbridge.send('VKWebAppShowBannerAd', {
 		banner_location: 'bottom'
 	})
 		.then((data) => {
