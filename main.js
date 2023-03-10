@@ -168,9 +168,9 @@ function showModal(message) {
 }
 
 function addAds() {
-	Bridge.send("VKWebAppCheckNativeAds", { "ad_format": "interstitial" });
+	vkBridge.send("VKWebAppCheckNativeAds", { "ad_format": "interstitial" });
 
-	Bridge.send("VKWebAppShowNativeAds", { ad_format: "interstitial" })
+	vkBridge.send("VKWebAppShowNativeAds", { ad_format: "interstitial" })
 		.then(data => console.log(data.result))
 		.catch(error => console.log(error));
 }
