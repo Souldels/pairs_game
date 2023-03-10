@@ -174,7 +174,22 @@ function showModal(message, callback) {
 }
 
 function addAds() {
-	vkBridge.send("VKWebAppShowNativeAds", { ad_format: "interstitial" })
-		.then(data => console.log(data.result))
-		.catch(error => console.log(error));
+	if (window.innerWidth < 576) {
+		vkBridge.send('VKWebAppShowBannerAd', {
+			banner_location: 'bottom'
+		})
+			.then((data) => {
+				if (data.result) {
+					// Баннерная реклама отобразилась
+				}
+			})
+			.catch((error) => {
+				// Ошибка
+				console.log(error);
+			});
+	} else {
+		vkBridge.send("VKWebAppShowNativeAds", { ad_format: "interstitial" })
+			.then(data => console.log(data.result))
+			.catch(error => console.log(error));
+	}
 }
