@@ -23,6 +23,8 @@ refreshBtn.addEventListener('click', resetGame);
 
 startBtn.addEventListener('click', startGame);
 
+vkBridge.send("VKWebAppCheckNativeAds", { "ad_format": "interstitial" });
+
 function startGame() {
 	instructionsModal.style.display = 'none';
 }
@@ -172,8 +174,6 @@ function showModal(message, callback) {
 }
 
 function addAds() {
-	vkBridge.send("VKWebAppCheckNativeAds", { "ad_format": "interstitial" });
-
 	vkBridge.send("VKWebAppShowNativeAds", { ad_format: "interstitial" })
 		.then(data => console.log(data.result))
 		.catch(error => console.log(error));
