@@ -40,6 +40,11 @@ function countdown() {
 			if (timeLeft === 0) {
 				clearInterval(timer);
 				showModal("Не повезло... Время вышло!");
+				Bridge.send("VKWebAppCheckNativeAds", { "ad_format": "interstitial" });
+
+				Bridge.send("VKWebAppShowNativeAds", { ad_format: "interstitial" })
+					.then(data => console.log(data.result))
+					.catch(error => console.log(error));
 				resetGame();
 			}
 
@@ -130,6 +135,11 @@ game();
 function checkWin() {
 	if (matchedCards.length === cardsArr.length) {
 		showModal("Вы выиграли!");
+		Bridge.send("VKWebAppCheckNativeAds", { "ad_format": "interstitial" });
+
+		Bridge.send("VKWebAppShowNativeAds", { ad_format: "interstitial" })
+			.then(data => console.log(data.result))
+			.catch(error => console.log(error));
 		resetGame();
 	}
 }
