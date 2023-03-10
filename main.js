@@ -25,6 +25,27 @@ startBtn.addEventListener('click', startGame);
 
 vkBridge.send("VKWebAppCheckNativeAds", { "ad_format": "interstitial" });
 
+if (window.innerWidth < 576) {
+	bridge.send('VKWebAppShowBannerAd', {
+		banner_location: 'bottom'
+	})
+		.then((data) => {
+			if (data.result) {
+				// Баннерная реклама отобразилась
+			}
+		})
+		.catch((error) => {
+			// Ошибка
+			console.log(error);
+		});
+} else {
+	function addAds() {
+		vkBridge.send("VKWebAppShowNativeAds", { ad_format: "interstitial" })
+			.then(data => console.log(data.result))
+			.catch(error => console.log(error));
+	}
+}
+
 function startGame() {
 	instructionsModal.style.display = 'none';
 }
@@ -171,25 +192,4 @@ function showModal(message, callback) {
 		modal.removeEventListener('transitionend', handler);
 		callback();
 	}, { once: true });
-}
-
-function addAds() {
-	if (window.innerWidth < 576) {
-		vkBridge.send('VKWebAppShowBannerAd', {
-			banner_location: 'bottom'
-		})
-			.then((data) => {
-				if (data.result) {
-					// Баннерная реклама отобразилась
-				}
-			})
-			.catch((error) => {
-				// Ошибка
-				console.log(error);
-			});
-	} else {
-		vkBridge.send("VKWebAppShowNativeAds", { ad_format: "interstitial" })
-			.then(data => console.log(data.result))
-			.catch(error => console.log(error));
-	}
 }
