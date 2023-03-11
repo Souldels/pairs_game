@@ -23,8 +23,23 @@ refreshBtn.addEventListener('click', resetGame);
 
 startBtn.addEventListener('click', startGame);
 
+vkBridge.send("VKWebAppCheckNativeAds", { "ad_format": "interstitial" });
+
 function startGame() {
 	instructionsModal.style.display = 'none';
+
+	vkBridge.send('VKWebAppShowBannerAd', {
+		banner_location: 'bottom'
+	})
+		.then((data) => {
+			if (data.result) {
+				// Баннерная реклама отобразилась
+			}
+		})
+		.catch((error) => {
+			// Ошибка
+			console.log(error);
+		});
 }
 
 // функция таймера
@@ -39,7 +54,7 @@ function countdown() {
 
 			if (timeLeft === 0) {
 				clearInterval(timer);
-				showModal("Не повезло... Время вышло!", addAds);
+				showModal("Не повезло... Время вышло!");
 				resetGame();
 			}
 
@@ -129,7 +144,7 @@ game();
 // Если пользователь победил
 function checkWin() {
 	if (matchedCards.length === cardsArr.length) {
-		showModal("Вы выиграли!", addAds);
+		showModal("Вы выиграли!");
 		resetGame();
 	}
 }
@@ -152,10 +167,11 @@ function resetGame() {
 	numArray();
 	shuffleCards(cardsArr);
 	game();
+	addAds();
 }
 
 // модальное окно
-function showModal(message, callback) {
+function showModal(message) {
 
 	modalMessage.textContent = message;
 	modal.style.display = 'flex';
@@ -163,17 +179,9 @@ function showModal(message, callback) {
 	closeBtn.addEventListener('click', () => {
 		modal.style.display = 'none';
 	});
-
-	// вызываем переданную функцию callback после закрытия модального окна
-	modal.addEventListener('transitionend', function handler() {
-		modal.removeEventListener('transitionend', handler);
-		callback();
-	}, { once: true });
 }
 
 function addAds() {
-	vkBridge.send("VKWebAppCheckNativeAds", { "ad_format": "interstitial" });
-
 	vkBridge.send("VKWebAppShowNativeAds", { ad_format: "interstitial" })
 		.then(data => console.log(data.result))
 		.catch(error => console.log(error));
