@@ -54,7 +54,7 @@ function countdown() {
 
 			if (timeLeft === 0) {
 				clearInterval(timer);
-				showModal("Не повезло... Время вышло!", addAds);
+				showModal("Не повезло... Время вышло!");
 				resetGame();
 			}
 
@@ -144,7 +144,7 @@ game();
 // Если пользователь победил
 function checkWin() {
 	if (matchedCards.length === cardsArr.length) {
-		showModal("Вы выиграли!", addAds);
+		showModal("Вы выиграли!");
 		resetGame();
 	}
 }
@@ -167,10 +167,11 @@ function resetGame() {
 	numArray();
 	shuffleCards(cardsArr);
 	game();
+	addAds();
 }
 
 // модальное окно
-function showModal(message, callback) {
+function showModal(message) {
 
 	modalMessage.textContent = message;
 	modal.style.display = 'flex';
@@ -178,12 +179,6 @@ function showModal(message, callback) {
 	closeBtn.addEventListener('click', () => {
 		modal.style.display = 'none';
 	});
-
-	// вызываем переданную функцию callback после закрытия модального окна
-	modal.addEventListener('transitionend', function handler() {
-		modal.removeEventListener('transitionend', handler);
-		callback();
-	}, { once: true });
 }
 
 function addAds() {
