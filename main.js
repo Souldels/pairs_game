@@ -167,7 +167,6 @@ function resetGame() {
 	numArray();
 	shuffleCards(cardsArr);
 	game();
-	addAds();
 }
 
 // модальное окно
@@ -178,6 +177,7 @@ function showModal(message) {
 
 	closeBtn.addEventListener('click', () => {
 		modal.style.display = 'none';
+		setTimeout(addAds, 300);
 	});
 }
 
