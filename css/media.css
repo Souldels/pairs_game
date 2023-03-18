@@ -30,4 +30,8 @@
 	.btn {
 		width: 100px;
 	}
+
+	.modal-instructions__content .btn {
+		width: 130px;
+	}
 }

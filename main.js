@@ -95,6 +95,12 @@ shuffleCards(cardsArr);
 function flipCard(e) {
 
 	let clickedCard = e.currentTarget;
+
+	// Если карточка уже перевернута или она уже совпала, то не реагируем на нажатие
+	if (clickedCard.classList.contains('flipped') || clickedCard.classList.contains('matched')) {
+		return;
+	}
+
 	gameStarted = true;
 
 	if (flippedCards.length < 2) {
