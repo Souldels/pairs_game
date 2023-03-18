@@ -62,7 +62,6 @@ function setupGame(difficulty) {
 		rows = 6;
 		columns = 4;
 		timeLeft = 60;
-		title.style.display = 'none';
 		cardsList.style.gap = '7px';
 	}
 
