@@ -19,13 +19,18 @@
 	}
 
 	.cards {
-		gap: 8px;
+		gap: 7px;
 	}
 
-	.card {
+
+	.card--easy,
+	.card--medium,
+	.card--hard {
 		width: 65px;
 		height: 65px;
 	}
+
+
 
 	.card__front, .card__back {
 		border-radius: 10px;

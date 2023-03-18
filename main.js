@@ -9,6 +9,7 @@ const modalMessage = document.querySelector('.modal-message');
 const closeBtn = document.querySelector('.modal-close');
 const startBtn = document.querySelector('.modal-btn');
 const instructionsModal = document.querySelector('.modal-instructions');
+const title = document.querySelector('.title');
 
 let cardsArr = [];
 let flippedCards = [];
@@ -38,7 +39,8 @@ difficultyBtns.forEach((btn) => {
 	});
 });
 
-
+// вызываем setupGame с начальной сложностью "средне"
+setupGame('medium');
 
 // Настройка игрового поля
 function setupGame(difficulty) {
@@ -55,10 +57,13 @@ function setupGame(difficulty) {
 		rows = 4;
 		columns = 4;
 		timeLeft = 30;
+
 	} else if (difficulty === "hard") {
 		rows = 6;
 		columns = 4;
 		timeLeft = 60;
+		title.style.display = 'none';
+		cardsList.style.gap = '7px';
 	}
 
 	// Устанавливаем количество строк и столбцов для игрового поля
@@ -181,6 +186,7 @@ function game() {
 	cardsArr.forEach((num) => {
 		const card = document.createElement("li");
 		card.classList.add('card');
+		card.classList.add(`card--${currentDifficulty}`);
 		card.innerHTML = `<div class="card__inner">
 											<div class="card__front"></div>
 											<div class="card__back">${num}</div>
@@ -202,6 +208,10 @@ function checkWin() {
 
 // сброс игры
 function resetGame() {
+	cardsArr = [];
+	flippedCards = [];
+	matchedCards = [];
+	cardsList.innerHTML = '';
 	// Остановить таймер, если он был запущен
 	if (timerStarted) {
 		clearInterval(timer);
@@ -213,9 +223,6 @@ function resetGame() {
 	timerBox.style.background = defaultColor;
 	setupGame(currentDifficulty);
 }
-
-// вызываем setupGame с начальной сложностью "средне"
-setupGame('medium');
 
 // модальное окно
 function showModal(message) {
