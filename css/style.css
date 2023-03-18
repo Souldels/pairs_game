@@ -25,13 +25,74 @@ ul {
 }
 
 h1,
-h2 {
+h2,
+h3 {
 	margin: 0;
 }
 
 .title {
-	margin-bottom: 60px;
+	margin-bottom: 30px;
 	font-size: 48px;
+}
+
+.difficulty {
+	margin-bottom: 30px;
+}
+
+.difficulty__title {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.difficulty__btn {
+	padding: 5px;
+	width: 100px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #fff;
+	cursor: pointer;
+	text-align: center;
+	border: none;
+	background-size: 300% 100%;
+	border-radius: 50px;
+	transition: all .4s ease-in-out;
+}
+
+.difficulty__btn:not(:last-child) {
+	margin-right: 5px;
+}
+
+.btn-easy {
+	background-image: linear-gradient(to right,
+			#009245,
+			#fcee21,
+			#00a8c5);
+	box-shadow: 0 4px 15px 0 rgba(217, 224, 33, 0.75);
+}
+
+.btn-middle {
+	background-image: linear-gradient(to right,
+			#ffee00,
+			#a17000,
+			#f0a001);
+	box-shadow: 0 4px 15px 0 rgba(224, 195, 33, 0.75);
+}
+
+.btn-hard {
+	background-image: linear-gradient(to right,
+			#e59d01,
+			#f43602,
+			#c50a00);
+	box-shadow: 0 4px 15px 0 rgba(235, 43, 0, 0.75);
+}
+
+.difficulty__btn:hover {
+	background-position: 100% 0;
+	transition: all .4s ease-in-out;
+}
+
+.difficulty__btn:focus {
+	outline: none;
 }
 
 .wrapper {
@@ -42,8 +103,8 @@ h2 {
 
 .cards {
 	display: grid;
-	grid-template-rows: repeat(4, 1fr);
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(var(--rows), 1fr);
+	grid-template-columns: repeat(var(--columns), 1fr);
 	gap: 15px;
 	margin-bottom: 15px;
 }

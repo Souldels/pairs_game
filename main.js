@@ -1,5 +1,5 @@
-const rows = 4;
-const columns = 4;
+let rows;
+let columns;
 const cardsList = document.querySelector('.cards');
 const timerDisplay = document.querySelector('.time');
 const refreshBtn = document.querySelector('.btn');
@@ -18,12 +18,57 @@ let timerStarted = false;
 let gameStarted = false;
 let timer;
 let defaultColor = '#c5c2c2';
+let currentDifficulty = 'medium';
 
 refreshBtn.addEventListener('click', resetGame);
 
 startBtn.addEventListener('click', startGame);
 
 vkBridge.send("VKWebAppCheckNativeAds", { "ad_format": "interstitial" });
+
+// Кнопки выбора сложности
+const difficultyBtns = document.querySelectorAll('.difficulty__btn');
+
+difficultyBtns.forEach((btn) => {
+	btn.addEventListener('click', (e) => {
+		const difficulty = e.target.dataset.difficulty;
+		console.log('выбор сложности')
+		resetGame();
+		setupGame(difficulty);
+	});
+});
+
+
+
+// Настройка игрового поля
+function setupGame(difficulty) {
+
+	cardsList.innerHTML = '';
+
+	currentDifficulty = difficulty;
+
+	if (difficulty === "easy") {
+		rows = 2;
+		columns = 4;
+		timeLeft = 15;
+	} else if (difficulty === "medium") {
+		rows = 4;
+		columns = 4;
+		timeLeft = 30;
+	} else if (difficulty === "hard") {
+		rows = 6;
+		columns = 4;
+		timeLeft = 60;
+	}
+
+	// Устанавливаем количество строк и столбцов для игрового поля
+	cardsList.style.setProperty('--rows', rows);
+	cardsList.style.setProperty('--columns', columns);
+
+	cardsArr = [];
+	game();
+}
+
 
 function startGame() {
 	instructionsModal.style.display = 'none';
@@ -130,6 +175,8 @@ function flipCard(e) {
 
 // рендер карточек
 function game() {
+	numArray();
+	shuffleCards(cardsArr);
 
 	cardsArr.forEach((num) => {
 		const card = document.createElement("li");
@@ -145,8 +192,6 @@ function game() {
 	});
 }
 
-game();
-
 // Если пользователь победил
 function checkWin() {
 	if (matchedCards.length === cardsArr.length) {
@@ -157,11 +202,6 @@ function checkWin() {
 
 // сброс игры
 function resetGame() {
-	cardsArr = [];
-	flippedCards = [];
-	matchedCards = [];
-	cardsList.innerHTML = '';
-
 	// Остановить таймер, если он был запущен
 	if (timerStarted) {
 		clearInterval(timer);
@@ -169,11 +209,13 @@ function resetGame() {
 	gameStarted = false;
 	timerStarted = false;
 	timeLeft = 30;
+	timerDisplay.textContent = timeLeft;
 	timerBox.style.background = defaultColor;
-	numArray();
-	shuffleCards(cardsArr);
-	game();
+	setupGame(currentDifficulty);
 }
+
+// вызываем setupGame с начальной сложностью "средне"
+setupGame('medium');
 
 // модальное окно
 function showModal(message) {
