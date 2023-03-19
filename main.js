@@ -127,8 +127,6 @@ function numArray() {
 	return cardsArr;
 }
 
-numArray();
-
 // Создание функции перемешивания массива. 
 function shuffleCards(arr) {
 	for (let i = arr.length - 1; i > 1; i--) {
